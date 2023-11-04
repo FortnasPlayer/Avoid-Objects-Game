@@ -1,0 +1,36 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checking for Updates</title>
+</head>
+<body>
+    <h1>Checking for Updates does not work</h1>
+    <form id="updateForm">
+        <label for="currentVersion">Current Version:</label>
+        <input type="text" id="currentVersion" name="currentVersion"><br><br>
+        <button type="button" onclick="checkForUpdate()">Check for Updates</button>
+    </form>
+
+    <div id="updateResult"></div>
+
+    <script>
+        function checkForUpdate() {
+            var currentVersion = document.getElementById("currentVersion").value;
+            var updateResultDiv = document.getElementById("updateResult");
+
+            // Wysyłanie żądania do serwera
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "http://example.com/check_for_update?current_version=" + currentVersion, true);
+
+            xhr.onload = function () {
+                if (xhr.status >= 200 && xhr.status < 400) {
+                    var data = JSON.parse(xhr.responseText);
+                    if (data.update_available) {
+                        updateResultDiv.innerHTML = "Dostępna jest nowa wersja gry. Aktualna wersja: " + data.latest_version + "<br>";
+                        updateResultDiv.innerHTML += "Pobierz ją ze strony: " + data.download_url;
+                    } else {
+                        updateResultDiv.innerHTML = "Twoja wersja gry jest aktualna.";
+                    }
+                }
