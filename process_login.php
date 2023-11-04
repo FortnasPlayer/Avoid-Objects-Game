@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Przykładowa weryfikacja: Sprawdzenie, czy użytkownik to "admin" i hasło to "admin123"
     if ($username === "admin" && $password === "admin123") {
         // Pomyślne logowanie - możesz przekierować użytkownika na inną stronę lub wykonać inne operacje
-        header("Location: welcome.php");
+        header("Location: index.html");
         exit();
     } else {
         // Błąd logowania - możesz wyświetlić komunikat lub przekierować użytkownika na stronę logowania z błędem
